@@ -1,0 +1,226 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Phone, Wrench, Flame, Droplets, ShieldCheck, Building2, Home, ArrowRight, Star, Clock, CalendarCheck, Quote } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import FAQ from "@/components/FAQ";
+import BeforeAfterGallery from "@/components/BeforeAfterGallery";
+import { JOBBER_BOOK_URL, PHONE_DISPLAY, PHONE_TEL, REVIEWS, FAQS } from "@/lib/site";
+import { CITIES } from "@/lib/cities";
+
+export const metadata: Metadata = {
+  title: "Niagara Plumber & Heating | 24/7 Service | Ottr Plumr",
+  description: "Licensed Niagara plumbers & HVAC techs — 24/7 emergency plumbing, drain cleaning, water heater repair, sump pumps, furnaces & boilers. Same-day service in St. Catharines, Niagara Falls & Welland. Call 289-488-1007.",
+  alternates: { canonical: "/" },
+};
+
+const services = [
+  { icon: Home, title: "Residential Plumbing", desc: "From dripping taps to full re-pipes — done right the first time." },
+  { icon: Building2, title: "Commercial Plumbing", desc: "Reliable service for shops, offices, and industrial sites across Niagara." },
+  { icon: Flame, title: "Heating Systems", desc: "Install, service, and repair for furnaces, boilers, and radiant heat." },
+  { icon: Droplets, title: "Water Heaters", desc: "Tank, tankless, and on-demand systems — sized and installed properly." },
+  { icon: ShieldCheck, title: "Sump Pumps", desc: "Keep your basement bone-dry with pro-grade sump pump installs." },
+  { icon: Wrench, title: "Repairs & Diagnostics", desc: "Honest assessments, fair pricing, no upsell games." },
+];
+
+const ld = [
+  { "@context": "https://schema.org", "@type": "WebPage", "@id": "https://plumr.ca/#webpage", url: "https://plumr.ca/", name: "Niagara Plumber & Heating | 24/7 Service | Ottr Plumr", about: { "@id": "https://plumr.ca/#business" } },
+  { "@context": "https://schema.org", "@type": "FAQPage", mainEntity: FAQS.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })) },
+];
+
+export default function HomePage() {
+  return (
+    <div>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(ld) }} />
+
+      {/* HERO */}
+      <section className="relative overflow-hidden bg-gradient-hero">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/assets/hero-pond.webp" alt="" aria-hidden="true" fetchPriority="high" decoding="async" width={1920} height={1080} className="absolute inset-0 w-full h-full object-cover opacity-40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-background/60 via-background/30 to-background" aria-hidden="true" />
+        <div className="container relative pt-16 pb-24 md:pt-24 md:pb-32 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="space-y-6">
+            <div className="inline-flex items-center gap-2 bg-card/80 backdrop-blur border-2 border-foreground/10 rounded-full px-4 py-1.5 text-xs font-semibold uppercase tracking-wider text-primary">
+              <Clock className="h-3.5 w-3.5" /> 24/7 Service · Niagara Region
+            </div>
+            <h1 className="font-display text-4xl md:text-6xl lg:text-7xl text-primary leading-[0.95]">
+              Plumber in Welland &amp; the <span className="text-accent">Niagara Region</span> — 24/7 Emergency Plumbing
+            </h1>
+            <p className="font-script text-2xl md:text-3xl text-reed">Otterly reliable. Professional, start to finish.</p>
+            <p className="text-base md:text-lg text-foreground/80 max-w-xl">
+              Looking for a plumber near you? Ottr Plumr is your local Niagara plumber for emergency plumbing, drain cleaning, water heater repair, sump pumps, furnaces and boilers — across St. Catharines, Niagara Falls, Welland and every town in between.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild variant="hero" size="lg"><a href={`tel:${PHONE_TEL}`}><Phone /> Call {PHONE_DISPLAY}</a></Button>
+              <Button asChild variant="deep" size="lg"><a href={JOBBER_BOOK_URL} target="_blank" rel="noopener noreferrer"><CalendarCheck /> Book Online</a></Button>
+              <Button asChild variant="outline" size="lg"><Link href="/contact">Get a Quote <ArrowRight /></Link></Button>
+            </div>
+            <div className="flex items-center gap-3 pt-2">
+              <div className="flex items-center gap-1.5 bg-card border-2 border-foreground/10 rounded-full px-3 py-1.5 shadow-soft">
+                <div className="flex text-accent">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-accent" />)}</div>
+                <span className="font-display text-sm text-primary">4.9/5</span>
+              </div>
+              <span className="text-sm text-foreground/70">Trusted by Niagara homeowners &amp; businesses</span>
+            </div>
+          </div>
+          <div className="relative hidden lg:flex justify-center items-center">
+            <div className="absolute inset-0 -m-10 rounded-full bg-water/40 blur-3xl" aria-hidden="true" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/ottr-mascot.webp" alt="Friendly otter mascot in plumber overalls — Ottr Plumr, Niagara Region" width={520} height={520} fetchPriority="high" decoding="async" className="relative w-[460px] h-auto drop-shadow-[0_20px_30px_hsl(215_75%_18%/0.35)] animate-float" />
+            <div className="absolute -bottom-6 left-1/2 -translate-x-1/2 w-40 h-10 rounded-full border-2 border-water-deep/60 animate-ripple" aria-hidden="true" />
+          </div>
+        </div>
+        <div className="water-band h-12 md:h-16" aria-hidden="true" />
+      </section>
+
+      {/* SERVICES */}
+      <section className="container py-20 md:py-28">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
+          <div>
+            <p className="font-script text-2xl text-accent">What we do</p>
+            <h2 className="font-display text-4xl md:text-5xl text-primary mt-1">Full-service plumbing &amp; heating</h2>
+          </div>
+          <Button asChild variant="deep"><Link href="/services">All services <ArrowRight /></Link></Button>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+          {services.map((s) => (
+            <article key={s.title} className="stamp-card p-6 group hover:-translate-y-1 transition-transform">
+              <div className="h-12 w-12 rounded-xl bg-primary text-primary-foreground grid place-items-center mb-4 shadow-soft group-hover:bg-accent transition-colors"><s.icon className="h-6 w-6" /></div>
+              <h3 className="font-display text-xl text-primary mb-1">{s.title}</h3>
+              <p className="text-sm text-foreground/75">{s.desc}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* WHY LOCAL */}
+      <section className="container pb-8 md:pb-12">
+        <div className="grid lg:grid-cols-[1.3fr_1fr] gap-10 items-start">
+          <div className="space-y-5">
+            <p className="font-script text-2xl text-accent">Why local matters</p>
+            <h2 className="font-display text-3xl md:text-4xl text-primary leading-tight">A real Niagara plumber answers the phone — every time.</h2>
+            <p className="text-foreground/80 text-base md:text-lg leading-relaxed">When you call Ottr Plumr, you reach a local technician — not a national call centre. We live in the Niagara Region, our shop is at 187 King St in Welland, and we know the housing stock here cold: century homes in St. Catharines, post-war bungalows in Welland and Port Colborne, lakeside cottages in Crystal Beach, vineyard properties in Lincoln, and new builds in Grimsby.</p>
+            <p className="text-foreground/80 text-base md:text-lg leading-relaxed">That local knowledge changes how we work. We know which neighbourhoods have clay sewer laterals fighting tree roots every spring, which lakeshore streets need battery-backup sump pumps, and which 1990s subdivisions are hitting the 25-year mark on their original water heaters.</p>
+            <p className="text-foreground/80 text-base md:text-lg leading-relaxed">Diagnose first, quote in writing, do the work clean. Every job warrantied. Every price upfront. Same-day service for most calls, 24/7 emergency response when something can't wait.</p>
+          </div>
+          <aside className="stamp-card p-7 md:p-8 bg-gradient-hero">
+            <p className="font-script text-2xl text-accent">What you can expect</p>
+            <h3 className="font-display text-2xl text-primary mt-1 mb-5">Every Ottr Plumr call</h3>
+            <ul className="space-y-3.5">
+              {["A real local technician on the phone","Clear arrival window (and a heads-up text when we're on the way)","Diagnostic first, then a written flat-rate quote","Drop cloths, clean uniforms, tidy job site","Plain-English explanation of the fix","Workmanship warrantied in writing","No upsells, no surprise charges"].map((item) => (
+                <li key={item} className="flex items-start gap-2.5">
+                  <span className="mt-1 h-2 w-2 rounded-full bg-accent shrink-0" aria-hidden="true" />
+                  <span className="text-foreground/85 text-sm md:text-base">{item}</span>
+                </li>
+              ))}
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      {/* WHY US */}
+      <section className="bg-gradient-deep text-primary-foreground py-20 md:py-28">
+        <div className="container grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <p className="font-script text-2xl text-primary-glow">Why Ottr Plumr?</p>
+            <h2 className="font-display text-4xl md:text-5xl mt-1 mb-6">Local pros. Honest work. No surprises.</h2>
+            <ul className="space-y-4 text-base">
+              {[["24/7 Emergency Response","Burst pipe at midnight? We pick up. Always."],["Licensed & Insured","Every job done to code, every time."],["Upfront Pricing","Quotes before work begins — no awkward surprises."],["Niagara-Wide Coverage","St. Catharines to Niagara Falls and every town in between."]].map(([t, d]) => (
+                <li key={t} className="flex gap-4">
+                  <div className="h-10 w-10 shrink-0 rounded-full bg-accent grid place-items-center font-display">✓</div>
+                  <div><div className="font-display text-lg">{t}</div><div className="opacity-80 text-sm">{d}</div></div>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className="bg-card text-foreground rounded-[2rem] p-8 shadow-pop border-4 border-primary-foreground/10">
+            <div className="flex items-center gap-3 mb-3">
+              <div className="flex text-accent">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-5 w-5 fill-accent" />)}</div>
+              <span className="font-display text-2xl text-primary">4.9</span>
+              <span className="text-sm text-foreground/60">/ 5 average rating</span>
+            </div>
+            <p className="text-foreground/80">Real reviews from real Niagara customers — see what folks are saying about our work.</p>
+          </div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
+      <section className="container py-20 md:py-24">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <p className="font-script text-2xl text-accent">Customer love</p>
+          <h2 className="font-display text-4xl md:text-5xl text-primary mt-1">Don't take our word for it</h2>
+        </div>
+        <div className="grid md:grid-cols-3 gap-5">
+          {REVIEWS.map((r) => (
+            <article key={r.name} className="stamp-card p-7 flex flex-col">
+              <Quote className="h-8 w-8 text-accent mb-3" />
+              <p className="text-foreground/85 flex-1">{r.quote}</p>
+              <div className="mt-5 pt-5 border-t border-foreground/10 flex items-center justify-between">
+                <div className="font-display text-primary">{r.name}</div>
+                <div className="flex text-accent">{Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-accent" />)}</div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+
+      {/* FLEET */}
+      <section className="relative overflow-hidden bg-gradient-hero py-20 md:py-24">
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/60 to-background" aria-hidden="true" />
+        <div className="container relative grid lg:grid-cols-2 gap-10 items-center">
+          <div className="space-y-5">
+            <p className="font-script text-2xl text-accent">On the road</p>
+            <h2 className="font-display text-4xl md:text-5xl text-primary leading-tight">Spot us around the <span className="text-accent">Niagara Region</span></h2>
+            <p className="text-foreground/80 text-base md:text-lg max-w-xl">Our service vans are out every day across Niagara — ready to diagnose, repair, and get most jobs sorted on the spot.</p>
+            <div className="flex flex-wrap gap-3 pt-2">
+              <Button asChild variant="hero" size="lg"><a href={`tel:${PHONE_TEL}`}><Phone /> Call {PHONE_DISPLAY}</a></Button>
+              <Button asChild variant="deep" size="lg"><a href={JOBBER_BOOK_URL} target="_blank" rel="noopener noreferrer"><CalendarCheck /> Book Online</a></Button>
+            </div>
+          </div>
+          <div className="relative">
+            <div className="absolute inset-0 -m-6 rounded-full bg-water/30 blur-3xl" aria-hidden="true" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/ottr-plumr-van.webp" alt="Ottr Plumr branded service van — Niagara plumbing and heating" width={1600} height={682} loading="lazy" decoding="async" className="relative w-full h-auto drop-shadow-[0_20px_30px_hsl(215_75%_18%/0.35)]" />
+          </div>
+        </div>
+      </section>
+
+      <BeforeAfterGallery />
+
+      {/* SERVICE AREAS */}
+      <section className="container py-12 md:py-16">
+        <div className="text-center max-w-2xl mx-auto mb-10">
+          <p className="font-script text-2xl text-accent">Where we work</p>
+          <h2 className="font-display text-4xl md:text-5xl text-primary mt-1">Proudly serving the Niagara Region</h2>
+          <p className="text-foreground/75 mt-4">Every city, every town. If you're in Niagara, we're your local crew.</p>
+        </div>
+        <div className="flex flex-wrap justify-center gap-2">
+          {CITIES.map((city) => (
+            <Link key={city.slug} href={`/service-areas/${city.slug}`} className="px-4 py-2 rounded-full bg-card border-2 border-foreground/10 text-sm font-semibold hover:bg-primary hover:text-primary-foreground hover:border-primary transition-colors">
+              {city.name}
+            </Link>
+          ))}
+        </div>
+        <div className="text-center mt-8"><Button asChild variant="deep"><Link href="/service-areas">All service areas <ArrowRight /></Link></Button></div>
+      </section>
+
+      <FAQ injectSchema={false} />
+
+      {/* CTA */}
+      <section className="container pb-8">
+        <div className="rounded-[2rem] overflow-hidden bg-accent text-accent-foreground p-10 md:p-14 shadow-pop relative">
+          <div className="absolute -right-10 -bottom-10 h-60 w-60 rounded-full bg-accent-foreground/10" aria-hidden="true" />
+          <div className="relative grid md:grid-cols-[1fr_auto] gap-6 items-center">
+            <div>
+              <h2 className="font-display text-3xl md:text-4xl">Got a leak, a chill, or a project?</h2>
+              <p className="opacity-90 mt-2">Pick up the phone, book online, or send us a message — we'll be there.</p>
+            </div>
+            <div className="flex flex-wrap gap-3">
+              <Button asChild size="lg" className="bg-card text-primary hover:bg-card/90"><a href={`tel:${PHONE_TEL}`}><Phone /> {PHONE_DISPLAY}</a></Button>
+              <Button asChild variant="deep" size="lg"><a href={JOBBER_BOOK_URL} target="_blank" rel="noopener noreferrer"><CalendarCheck /> Book Online</a></Button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  );
+}
