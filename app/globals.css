@@ -1,0 +1,119 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Ottr Plumr design system — warm tan, deep blue, hot red. All HSL. */
+
+@layer base {
+  :root {
+    /* Brand canvas */
+    --background: 32 55% 88%;          /* warm cream tan */
+    --foreground: 215 60% 18%;         /* deep blue ink */
+
+    --card: 36 60% 94%;
+    --card-foreground: 215 60% 18%;
+
+    --popover: 36 60% 94%;
+    --popover-foreground: 215 60% 18%;
+
+    /* Primary = deep brand blue (logo blue) */
+    --primary: 212 70% 32%;
+    --primary-foreground: 36 60% 96%;
+    --primary-glow: 200 75% 55%;
+
+    /* Secondary = warm sand */
+    --secondary: 30 50% 78%;
+    --secondary-foreground: 215 60% 18%;
+
+    --muted: 32 35% 82%;
+    --muted-foreground: 215 25% 35%;
+
+    /* Accent = hot brand red (logo banner) */
+    --accent: 358 75% 48%;
+    --accent-foreground: 36 60% 96%;
+
+    /* Water = light pool blue from logo bottom band */
+    --water: 188 65% 78%;
+    --water-deep: 200 70% 60%;
+
+    /* Reed / cattail brown */
+    --reed: 22 45% 38%;
+
+    --destructive: 0 75% 45%;
+    --destructive-foreground: 36 60% 96%;
+
+    --border: 30 35% 70%;
+    --input: 30 35% 80%;
+    --ring: 212 70% 32%;
+
+    --radius: 1rem;
+
+    /* Gradients */
+    --gradient-water: linear-gradient(180deg, hsl(var(--water)) 0%, hsl(var(--water-deep)) 100%);
+    --gradient-sand: linear-gradient(180deg, hsl(36 60% 92%) 0%, hsl(32 55% 84%) 100%);
+    --gradient-hero: radial-gradient(ellipse at 50% 40%, hsl(36 65% 92%) 0%, hsl(30 50% 78%) 70%);
+    --gradient-deep: linear-gradient(135deg, hsl(212 70% 32%) 0%, hsl(215 75% 22%) 100%);
+
+    /* Shadows */
+    --shadow-pop: 0 10px 30px -8px hsl(212 70% 25% / 0.35);
+    --shadow-stamp: 0 6px 0 hsl(215 75% 18%);
+    --shadow-soft: 0 8px 24px -10px hsl(22 30% 30% / 0.25);
+
+    --transition-bounce: all 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: 'Bowlby One', 'Inter', sans-serif;
+    letter-spacing: -0.01em;
+  }
+
+  .font-script {
+    font-family: 'Caveat', cursive;
+  }
+}
+
+@layer components {
+  .water-band {
+    background: var(--gradient-water);
+    position: relative;
+  }
+  .water-band::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 8px at 20% 30%, hsl(0 0% 100% / 0.5), transparent 70%),
+      radial-gradient(ellipse 50% 6px at 70% 60%, hsl(0 0% 100% / 0.4), transparent 70%),
+      radial-gradient(ellipse 55% 7px at 45% 80%, hsl(0 0% 100% / 0.45), transparent 70%);
+    pointer-events: none;
+  }
+
+  .stamp-card {
+    @apply bg-card rounded-[var(--radius)] border-2 border-foreground/10;
+    box-shadow: var(--shadow-soft);
+  }
+}
